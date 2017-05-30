@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logikwis", "Logikwis\Logikwis.csproj", "{9DD1E5A3-91CE-4CCD-AF8A-D2B4BE3AB9AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logikwis.Test", "Logikwis.Test\Logikwis.Test.csproj", "{939114F5-1A5F-4485-8236-899D2C6E506E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9DD1E5A3-91CE-4CCD-AF8A-D2B4BE3AB9AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DD1E5A3-91CE-4CCD-AF8A-D2B4BE3AB9AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DD1E5A3-91CE-4CCD-AF8A-D2B4BE3AB9AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{939114F5-1A5F-4485-8236-899D2C6E506E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{939114F5-1A5F-4485-8236-899D2C6E506E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{939114F5-1A5F-4485-8236-899D2C6E506E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{939114F5-1A5F-4485-8236-899D2C6E506E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

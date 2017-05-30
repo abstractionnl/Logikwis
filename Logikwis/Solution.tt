@@ -1,0 +1,66 @@
+﻿<#@ output extension=".cs" #>  
+<#@ template language="C#" Debug="true" #>
+<#@ assembly name="System" #> 
+<#@ assembly name="System.Core" #>  
+<#@ assembly name="System.Linq" #>  
+<#@ import namespace="System.Linq" #>  
+using System;
+using System.Collections.Generic;
+using System.Linq;
+<#
+int total = 9;
+#>
+
+namespace Logikwis {
+<# for (int i=1; i<=total; i++) { #>
+	
+	public class <#= FullTypeName(i) #>  {
+		public IReadOnlyCollection<<#= CombinationTypeName(i) #>> Combinations { get; }
+
+		public Solution(IReadOnlyCollection<<#= CombinationTypeName(i) #>> combinations) {
+			Combinations = combinations;
+		}
+
+		public Solution(params <#= CombinationTypeName(i) #>[] combinations) {
+			Combinations = combinations;
+		}
+
+		public bool Equals(<#= FullTypeName(i) #> obj) =>
+			Combinations.Count == obj.Combinations.Count && Combinations.All(c => obj.Combinations.Contains(c));
+
+		public override bool Equals(object obj) {
+			if (ReferenceEquals(obj, this)) return true;
+			if (ReferenceEquals(obj, null)) return false;
+			if (obj.GetType() != GetType()) return false;
+			return Equals((<#= FullTypeName(i) #>) obj);
+		}
+
+		public override int GetHashCode()
+        {
+            return Combinations.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return $"[{string.Join(",", Combinations)}]";
+        }
+	}
+<# } #>
+}
+<#+
+private string FullTypeName(int typeCount) {
+	return "Solution<" + string.Join(",", Enumerable.Range(1, typeCount).Select(x => $"T{x}")) + ">";
+}
+private string CombinationTypeName(int typeCount) {
+	return "Combination<" + string.Join(",", Enumerable.Range(1, typeCount).Select(x => $"T{x}")) + ">";
+}
+private string TypeName(int x) {
+	return $"T{x}";
+}
+private string ValueName(int x) {
+	return $"Value{x}";
+}
+private string LocalValueName(int x) {
+	return $"value{x}";
+}
+#>

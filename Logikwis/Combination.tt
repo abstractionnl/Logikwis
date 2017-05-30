@@ -1,0 +1,90 @@
+﻿<#@ output extension=".cs" #>  
+<#@ template language="C#" Debug="true" #>
+<#@ assembly name="System" #> 
+<#@ assembly name="System.Core" #>  
+<#@ assembly name="System.Linq" #>  
+<#@ import namespace="System.Linq" #>  
+using System;
+using System.Collections.Generic;
+<#
+int total = 9;
+#>
+
+namespace Logikwis {
+<# for (int i=1; i<=total; i++) { #>
+	
+	public class <#= FullTypeName(i) #>  {
+<# for (var x=1; x<=i; x++) { #>
+		public <#= TypeName(x) #> <#= ValueName(x) #> { get; }
+<# } #>
+
+		public Combination(<# for (var x=1; x<=i; x++) { #><#= TypeName(x) #> <#= LocalValueName(x) #><# if (x != i) #>, <# } #>) {
+<# for (var x=1; x<=i; x++) { #>
+			<#= ValueName(x) #> = <#= LocalValueName(x) #>;
+<# } #>
+		}
+
+		public bool Equals(<#= FullTypeName(i) #> obj) =>
+<# for (var x=1; x<=i; x++) { #>
+			EqualityComparer<<#= TypeName(x) #>>.Default.Equals(<#= ValueName(x) #>, obj.<#= ValueName(x) #>)<# if (x != i) #> &&
+<# } #>;
+
+		public override bool Equals(object obj) {
+			if (ReferenceEquals(obj, this)) return true;
+			if (ReferenceEquals(obj, null)) return false;
+			if (obj.GetType() != GetType()) return false;
+			return Equals((<#= FullTypeName(i) #>) obj);
+		}
+
+		public override int GetHashCode() {
+			var hashCode = 0;
+<# for (var x=1; x<=i; x++) { #>
+			hashCode = hashCode * 397 ^ EqualityComparer<<#= TypeName(x) #>>.Default.GetHashCode(<#= ValueName(x) #>);
+<# } #>
+			return hashCode;
+		}
+
+<# if (i != total) { #>
+		public <#= FullTypeName(i+1) #> Add<<#= TypeName(i+1) #>>(<#= TypeName(i+1) #> <#= LocalValueName(i+1) #>) =>
+			new <#= FullTypeName(i+1) #>(<# for (var x=1; x<=i; x++) { #><#= ValueName(x) #>, <# } #><#= LocalValueName(i+1) #>);
+<# } #>
+
+		public static IEnumerable<<#= FullTypeName(i) #>> Zip(<# for (var x=1; x<=i; x++) { #>IEnumerable<<#= TypeName(x) #>> <#= LocalEnumerationName(x) #><# if (x != i) #>, <# } #>) {
+<# for (var x=1; x<=i; x++) { #>
+			using (var <#= LocalEnumeratorName(x) #> = <#= LocalEnumerationName(x) #>.GetEnumerator())
+<# } #>
+			{
+				while (<# for (var x=1; x<=i; x++) { #><#= LocalEnumeratorName(x) #>.MoveNext()<# if (x != i) #> && <# } #>) {
+					yield return new <#= FullTypeName(i) #>(<# for (var x=1; x<=i; x++) { #><#= LocalEnumeratorName(x) #>.Current<# if (x != i) #>, <# } #>);
+				}
+			}
+		}
+
+		public override string ToString() => string.Format("<<# for (var x=1; x<=i; x++) { #>{<#= x-1 #>}<# if (x != i) #>, <# } #>>"<# for (var x=1; x<=i; x++) { #>, <#= ValueName(x) #><# } #>);
+
+	}
+<# } #>
+}
+<#+
+private string FullTypeName(int typeCount) {
+	return "Combination<" + string.Join(",", Enumerable.Range(1, typeCount).Select(x => $"T{x}")) + ">";
+}
+private string TypeName(int x) {
+	return $"T{x}";
+}
+private string ValueName(int x) {
+	return $"Value{x}";
+}
+private string ToStringExpression(int typeCount) {
+	return string.Join(",", Enumerable.Range(1, typeCount).Select(x => $"{{Value{x}}}"));
+}
+private string LocalValueName(int x) {
+	return $"value{x}";
+}
+private string LocalEnumerationName(int x) {
+	return $"values{x}";
+}
+private string LocalEnumeratorName(int x) {
+	return $"enumerator{x}";
+}
+#>
