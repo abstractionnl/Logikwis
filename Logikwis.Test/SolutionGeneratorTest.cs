@@ -10,17 +10,8 @@ namespace Logikwis.Test
     public class SolutionGeneratorTests
     {
         [Fact]
-        public void CombiningSingleArrayReturnsOnePermutation()
-        {
-            CheckCollection(A(1), S(C(1)));
-            CheckCollection(A(1, 2), S(C(1), C(2)));
-            CheckCollection(A(1, 2, 3, 4, 5), S(C(1), C(2), C(3), C(4), C(5)));
-        }
-
-        [Fact]
         public void CombiningWithZeroLengthReturnsNothing()
         {
-            CheckCollection(A<int>());
             CheckCollection(A<int>(), A<int>());
             CheckCollection(A<int>(), A<int>(), A<int>());
         }
@@ -179,33 +170,22 @@ namespace Logikwis.Test
 
         private static IReadOnlyCollection<T> A<T>(params T[] a) => a;
 
-        private static Combination<int> C(int a) => new Combination<int>(a);
-
         private static Combination<int, int> C(int a, int b) => new Combination<int, int>(a, b);
 
         private static Combination<int, int, int> C(int a, int b, int c) => new Combination<int, int, int>(a, b, c);
 
-        private static Solution<int> S(params Combination<int>[] combinations) => new Solution<int>(combinations);
+        private static Solution<Combination<int, int>> S(params Combination<int, int>[] combinations) => new Solution<Combination<int, int>>(combinations);
 
-        private static Solution<int, int> S(params Combination<int, int>[] combinations) => new Solution<int, int>(combinations);
+        private static Solution<Combination<int, int, int>> S(params Combination<int, int, int>[] combinations) => new Solution<Combination<int, int, int>>(combinations);
 
-        private static Solution<int, int, int> S(params Combination<int, int, int>[] combinations) => new Solution<int, int, int>(combinations);
-
-        private void CheckCollection(IReadOnlyCollection<int> a, params Solution<int>[] result)
-        {
-            var combinations = SolutionGenerator.Generate(a).ToList();
-
-            Check.That(combinations).Contains(result).And.HasSize(result.Length);
-        }
-
-        private void CheckCollection(IReadOnlyCollection<int> a, IReadOnlyCollection<int> b, params Solution<int, int>[] result)
+        private void CheckCollection(IReadOnlyCollection<int> a, IReadOnlyCollection<int> b, params Solution<Combination<int, int>>[] result)
         {
             var combinations = SolutionGenerator.Generate(a, b).ToList();
 
             Check.That(combinations).Contains(result).And.HasSize(result.Length);
         }
 
-        private void CheckCollection(IReadOnlyCollection<int> a, IReadOnlyCollection<int> b, IReadOnlyCollection<int> c, params Solution<int, int, int>[] result)
+        private void CheckCollection(IReadOnlyCollection<int> a, IReadOnlyCollection<int> b, IReadOnlyCollection<int> c, params Solution<Combination<int, int, int>>[] result)
         {
             var combinations = SolutionGenerator.Generate(a, b, c).ToList();
 

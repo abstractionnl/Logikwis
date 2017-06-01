@@ -11,7 +11,7 @@ int total = 9;
 #>
 
 namespace Logikwis {
-<# for (int i=1; i<=total; i++) { #>
+<# for (int i=2; i<=total; i++) { #>
 	
 	public class <#= FullTypeName(i) #>  {
 <# for (var x=1; x<=i; x++) { #>
@@ -43,11 +43,6 @@ namespace Logikwis {
 <# } #>
 			return hashCode;
 		}
-
-<# if (i != total) { #>
-		public <#= FullTypeName(i+1) #> Add<<#= TypeName(i+1) #>>(<#= TypeName(i+1) #> <#= LocalValueName(i+1) #>) =>
-			new <#= FullTypeName(i+1) #>(<# for (var x=1; x<=i; x++) { #><#= ValueName(x) #>, <# } #><#= LocalValueName(i+1) #>);
-<# } #>
 
 		public static IEnumerable<<#= FullTypeName(i) #>> Zip(<# for (var x=1; x<=i; x++) { #>IEnumerable<<#= TypeName(x) #>> <#= LocalEnumerationName(x) #><# if (x != i) #>, <# } #>) {
 <# for (var x=1; x<=i; x++) { #>
