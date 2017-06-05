@@ -3,16 +3,17 @@ using System.Linq;
 
 namespace Logikwis
 {
+    public static class Solution
+    {
+        public static Solution<TCombination> Create<TCombination>(IReadOnlyCollection<TCombination> combinations) =>
+            new Solution<TCombination>(combinations);
+    }
+
     public class Solution<TCombination>
     {
         public IReadOnlyCollection<TCombination> Combinations { get; }
 
         public Solution(IReadOnlyCollection<TCombination> combinations)
-        {
-            Combinations = combinations;
-        }
-
-        public Solution(params TCombination[] combinations)
         {
             Combinations = combinations;
         }

@@ -11,9 +11,15 @@ int total = 9;
 #>
 
 namespace Logikwis {
+	public static class Combination {
 <# for (int i=2; i<=total; i++) { #>
-	
-	public class <#= FullTypeName(i) #>  {
+		public static <#= FullTypeName(i) #> Create<<# for (var x=1; x<=i; x++) { #><#= TypeName(x) #><# if (x != i) #>, <# } #>>(<# for (var x=1; x<=i; x++) { #><#= TypeName(x) #> <#= LocalValueName(x) #><# if (x != i) #>, <# } #>) =>
+			new <#= FullTypeName(i) #>(<# for (var x=1; x<=i; x++) { #><#= LocalValueName(x) #><# if (x != i) #>, <# } #>);
+<# } #>
+	}
+
+<# for (int i=2; i<=total; i++) { #>
+	public class <#= FullTypeName(i) #> {
 <# for (var x=1; x<=i; x++) { #>
 		public <#= TypeName(x) #> <#= ValueName(x) #> { get; }
 <# } #>

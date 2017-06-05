@@ -170,13 +170,13 @@ namespace Logikwis.Test
 
         private static IReadOnlyCollection<T> A<T>(params T[] a) => a;
 
-        private static Combination<int, int> C(int a, int b) => new Combination<int, int>(a, b);
+        private static Combination<int, int> C(int a, int b) => Combination.Create(a, b);
 
-        private static Combination<int, int, int> C(int a, int b, int c) => new Combination<int, int, int>(a, b, c);
+        private static Combination<int, int, int> C(int a, int b, int c) => Combination.Create(a, b, c);
 
-        private static Solution<Combination<int, int>> S(params Combination<int, int>[] combinations) => new Solution<Combination<int, int>>(combinations);
+        private static Solution<Combination<int, int>> S(params Combination<int, int>[] combinations) => Solution.Create(combinations);
 
-        private static Solution<Combination<int, int, int>> S(params Combination<int, int, int>[] combinations) => new Solution<Combination<int, int, int>>(combinations);
+        private static Solution<Combination<int, int, int>> S(params Combination<int, int, int>[] combinations) => Solution.Create(combinations);
 
         private void CheckCollection(IReadOnlyCollection<int> a, IReadOnlyCollection<int> b, params Solution<Combination<int, int>>[] result)
         {

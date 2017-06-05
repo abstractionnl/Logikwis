@@ -7,8 +7,26 @@ using System;
 using System.Collections.Generic;
 
 namespace Logikwis {
-	
-	public class Combination<T1,T2>  {
+	public static class Combination {
+		public static Combination<T1,T2> Create<T1, T2>(T1 value1, T2 value2) =>
+			new Combination<T1,T2>(value1, value2);
+		public static Combination<T1,T2,T3> Create<T1, T2, T3>(T1 value1, T2 value2, T3 value3) =>
+			new Combination<T1,T2,T3>(value1, value2, value3);
+		public static Combination<T1,T2,T3,T4> Create<T1, T2, T3, T4>(T1 value1, T2 value2, T3 value3, T4 value4) =>
+			new Combination<T1,T2,T3,T4>(value1, value2, value3, value4);
+		public static Combination<T1,T2,T3,T4,T5> Create<T1, T2, T3, T4, T5>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5) =>
+			new Combination<T1,T2,T3,T4,T5>(value1, value2, value3, value4, value5);
+		public static Combination<T1,T2,T3,T4,T5,T6> Create<T1, T2, T3, T4, T5, T6>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6) =>
+			new Combination<T1,T2,T3,T4,T5,T6>(value1, value2, value3, value4, value5, value6);
+		public static Combination<T1,T2,T3,T4,T5,T6,T7> Create<T1, T2, T3, T4, T5, T6, T7>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6, T7 value7) =>
+			new Combination<T1,T2,T3,T4,T5,T6,T7>(value1, value2, value3, value4, value5, value6, value7);
+		public static Combination<T1,T2,T3,T4,T5,T6,T7,T8> Create<T1, T2, T3, T4, T5, T6, T7, T8>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6, T7 value7, T8 value8) =>
+			new Combination<T1,T2,T3,T4,T5,T6,T7,T8>(value1, value2, value3, value4, value5, value6, value7, value8);
+		public static Combination<T1,T2,T3,T4,T5,T6,T7,T8,T9> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6, T7 value7, T8 value8, T9 value9) =>
+			new Combination<T1,T2,T3,T4,T5,T6,T7,T8,T9>(value1, value2, value3, value4, value5, value6, value7, value8, value9);
+	}
+
+	public class Combination<T1,T2> {
 		public T1 Value1 { get; }
 		public T2 Value2 { get; }
 
@@ -48,8 +66,7 @@ namespace Logikwis {
 		public override string ToString() => string.Format("<{0}, {1}>", Value1, Value2);
 
 	}
-	
-	public class Combination<T1,T2,T3>  {
+	public class Combination<T1,T2,T3> {
 		public T1 Value1 { get; }
 		public T2 Value2 { get; }
 		public T3 Value3 { get; }
@@ -94,8 +111,7 @@ namespace Logikwis {
 		public override string ToString() => string.Format("<{0}, {1}, {2}>", Value1, Value2, Value3);
 
 	}
-	
-	public class Combination<T1,T2,T3,T4>  {
+	public class Combination<T1,T2,T3,T4> {
 		public T1 Value1 { get; }
 		public T2 Value2 { get; }
 		public T3 Value3 { get; }
@@ -145,8 +161,7 @@ namespace Logikwis {
 		public override string ToString() => string.Format("<{0}, {1}, {2}, {3}>", Value1, Value2, Value3, Value4);
 
 	}
-	
-	public class Combination<T1,T2,T3,T4,T5>  {
+	public class Combination<T1,T2,T3,T4,T5> {
 		public T1 Value1 { get; }
 		public T2 Value2 { get; }
 		public T3 Value3 { get; }
@@ -201,8 +216,7 @@ namespace Logikwis {
 		public override string ToString() => string.Format("<{0}, {1}, {2}, {3}, {4}>", Value1, Value2, Value3, Value4, Value5);
 
 	}
-	
-	public class Combination<T1,T2,T3,T4,T5,T6>  {
+	public class Combination<T1,T2,T3,T4,T5,T6> {
 		public T1 Value1 { get; }
 		public T2 Value2 { get; }
 		public T3 Value3 { get; }
@@ -262,8 +276,7 @@ namespace Logikwis {
 		public override string ToString() => string.Format("<{0}, {1}, {2}, {3}, {4}, {5}>", Value1, Value2, Value3, Value4, Value5, Value6);
 
 	}
-	
-	public class Combination<T1,T2,T3,T4,T5,T6,T7>  {
+	public class Combination<T1,T2,T3,T4,T5,T6,T7> {
 		public T1 Value1 { get; }
 		public T2 Value2 { get; }
 		public T3 Value3 { get; }
@@ -328,8 +341,7 @@ namespace Logikwis {
 		public override string ToString() => string.Format("<{0}, {1}, {2}, {3}, {4}, {5}, {6}>", Value1, Value2, Value3, Value4, Value5, Value6, Value7);
 
 	}
-	
-	public class Combination<T1,T2,T3,T4,T5,T6,T7,T8>  {
+	public class Combination<T1,T2,T3,T4,T5,T6,T7,T8> {
 		public T1 Value1 { get; }
 		public T2 Value2 { get; }
 		public T3 Value3 { get; }
@@ -399,8 +411,7 @@ namespace Logikwis {
 		public override string ToString() => string.Format("<{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}>", Value1, Value2, Value3, Value4, Value5, Value6, Value7, Value8);
 
 	}
-	
-	public class Combination<T1,T2,T3,T4,T5,T6,T7,T8,T9>  {
+	public class Combination<T1,T2,T3,T4,T5,T6,T7,T8,T9> {
 		public T1 Value1 { get; }
 		public T2 Value2 { get; }
 		public T3 Value3 { get; }
